@@ -4,6 +4,7 @@ import passport from "passport";
 
 import authRouter from './routes/auth';
 import userRouter from './routes/user';
+import requireUser from "./middleware/requireUser";
 
 const app = express();
 
@@ -16,13 +17,7 @@ app.use(passport.authenticate('session'));
 
 app.use('/auth', authRouter);
 
-function requireUser(req: any, res: any, next: any) {
-  if (!req.user) {
-    return next(new Error('Uninitialized'))
-  };
-  next();
-}
-
-app.use('/user', requireUser, userRouter);
+app.use(requireUser)
+app.use('/user', userRouter);
 
 export default app;
