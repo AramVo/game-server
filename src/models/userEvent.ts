@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userEventSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  },
   event: {
     type: Schema.Types.ObjectId,
     ref: 'event'

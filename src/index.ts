@@ -2,6 +2,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 
 import './auth/googleStrategy';
+import setupCronjobs from './utils/scheduler';
 import app from './app';
 import initializeEvent from './utils/eventInitializer';
 
@@ -10,6 +11,7 @@ async function main() {
   console.log('connected to db');
 
   await initializeEvent();
+  setupCronjobs();
 
   app.listen(process.env.PORT, () => {
     console.log('listening to port: ', process.env.PORT);
